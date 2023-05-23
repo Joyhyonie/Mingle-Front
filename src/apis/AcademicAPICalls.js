@@ -1,5 +1,5 @@
 import { getEmployees, getEmployee, postEmployee, putEmployee, deleteEmployee } from '../modules/EmployeeModule';
-import { getStudents, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
+import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
