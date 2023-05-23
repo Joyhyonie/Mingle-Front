@@ -12,10 +12,11 @@ const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
 const PATCH_EMPLOYEE = 'employee/PATCH_EMPLOYEE';
 const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
 const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
+const DELETE_EMPLOYEE = 'employee/DELETE_EMPLOYEE';
 
 
 export const { employee : 
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee }} = createActions
+  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee }} = createActions
 
 
     ({
@@ -27,7 +28,8 @@ export const { employee :
       [GET_EMPLOYEE]: res => res,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
-      [PUT_EMPLOYEE]: (res) => res
+      [PUT_EMPLOYEE]: (res) => res,
+      [DELETE_EMPLOYEE]: (res) => res,
 
     });
 
@@ -39,8 +41,8 @@ const EmployeeReducer = handleActions({
   [GET_EMPLOYEE]: (state, { payload }) => ({ employee: payload }),
   [POST_EMPLOYEE]: (state, { payload }) => ({ regist: payload }),
   [PUT_EMPLOYEE]: (state, { payload }) => ({ modify: payload }),
-  [PATCH_EMPLOYEE]: (state, { payload }) => payload
-
+  [PATCH_EMPLOYEE]: (state, { payload }) => payload,
+  [DELETE_EMPLOYEE] : (state, {payload}) => ({delete : payload}),
 
 }, initialState);
 

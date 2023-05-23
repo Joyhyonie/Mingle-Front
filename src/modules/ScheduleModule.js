@@ -41,7 +41,7 @@ const ScheduleReducer = handleActions(
         [PUT_MY_SCHEDULE] : (state, { payload }) => ({ modifyMySche : payload }),
         [DELETE_MY_SCHEDULE] : (state, { payload }) => ({ removeMySche : payload }),
         [GET_ALL_AC_SCHEDULE] : (state, { payload }) => ({ allAcSchedule : payload }),
-        [GET_AC_SCHEDULE] : (state, { payload }) => ({ acSchedule : payload }),
+        [GET_AC_SCHEDULE] : (state, { payload }) => ({ ...state, acSchedule : payload }),
     }
 , initalState);
 

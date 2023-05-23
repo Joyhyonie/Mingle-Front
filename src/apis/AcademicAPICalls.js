@@ -1,5 +1,5 @@
-import { getEmployees, getEmployee, postEmployee, putEmployee } from '../modules/EmployeeModule';
-import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
+import { getEmployees, getEmployee, postEmployee, putEmployee, deleteEmployee } from '../modules/EmployeeModule';
+import { getStudents, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -23,10 +23,10 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
   }
 }
 
-// 교직원(조직도) 서치
+// 교직원(조직도) 서치 (검색어에 해당)
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
-  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
-  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${search}&page=${currentPage}`;
+  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어 인코딩
+  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${encodedSearch}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
     const result = await fetch(requestURL).then(response => response.json());
@@ -37,6 +37,22 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
     }
   }
 }
+
+// 교직원(조직도) 서치 - 소속별
+export const callEmployeeDepartmentsListAPI = ({ deptCode, currentPage = 1 }) => {
+  
+  const requestURL = `${EMPLOYEE_URL}/employees/department/${deptCode}?page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if(result.status === 200) {
+      console.log("EmployeeAPICalls] callEmployeeDepartmentsListAPI result : ", result);
+      dispatch(getEmployees(result));
+    }
+  }
+}
+
 
 
 // 교직원 상세 조회
@@ -98,6 +114,29 @@ export const callEmployeeUpdateAPI = (formData) => {
   }
 }
 
+// 교직원 정보 삭제
+export const callEmployeesDeleteAPI = (empCodes) => {
+
+  const requestURL = `${EMPLOYEE_URL}/delete`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(empCodes),
+    }).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log('[AcademicAPICalls] : callEmployeesDeleteAPI result : ', result);
+      dispatch(deleteEmployee(result));
+    }
+  }
+}
+
+
 
 // 학생 전체 조회
 export const callStudentsAPI = ({ currentPage = 1 }) => {
@@ -114,30 +153,6 @@ export const callStudentsAPI = ({ currentPage = 1 }) => {
       console.log("[AcademicAPICalls] callStudentsAPI result : ", result);
     }
   }
-}
-
-// 학생 상세 조회
-export const callStudentDetailAPI = ({ stdCode }) => {
-
-  const requestURL = `${STUDENT_URL}/students/${stdCode}`;
-
-  return async (dispatch, getState) => {
-
-    const result = await fetch(requestURL, {
-        method : 'GET',
-        headers : {
-          "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-        }
-      }).then(response => response.json());
-
-    if (result.status === 200) {
-      console.log("[AcademicAPICalls] callStudentDetailAPI result : ", result);
-      dispatch(getStudent(result));
-
-
-    }
-  }
-
 }
 
 // 학생 신규 등록
@@ -159,26 +174,6 @@ export const callStudentInsertAPI = (formData) => {
     }
 
     console.log(result.data);
-  }
-}
-
-// 학생 정보 수정
-export const callStudentUpdateAPI = (formData) => {
-
-  const requestURL = `${STUDENT_URL}/modify`;
-
-  return async (dispatch, getState) => {
-
-    console.log(formData);
-    const result = await fetch(requestURL, {
-      method: "PUT",
-      body: formData
-    }).then(response => response.json());
-
-    if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callStudentUpdateAPI result : ', result);
-      dispatch(putStudent(result));
-    }
   }
 }
 

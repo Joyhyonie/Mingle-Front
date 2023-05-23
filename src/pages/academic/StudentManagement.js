@@ -38,11 +38,6 @@ function StudentManagement() {
     [currentPage]
   );
 
-  // 테이블 행을 클릭하면 학생 상세 및 수정 페이지로 라우팅
-  const onClickTableTr = (stdCode) => {
-    console.log("학생 정보 : " + stdCode)
-    navigate(`/${stdCode}/modify`);
-  }
 
   // 각 학생의 체크박스
   const handleCheckboxChange = (e, stdCode) => {
@@ -93,12 +88,6 @@ function StudentManagement() {
     };
 
 
-  // // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
-  // const onClickTableTr = (student) => {
-  //   setIsEmployeeUpdateModalOpen(true);
-  // }
-
-
   return (
     <motion.div
       className={StudentListCss.studentList}
@@ -108,7 +97,6 @@ function StudentManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={StudentListCss.studentRegistButton}
-        onClick={onClickStudentInsert}
         onClick={onClickStudentInsert}
       >
         등록
@@ -161,7 +149,6 @@ function StudentManagement() {
             data.map((student) => (
               <tr
                 key={student.stdCode}
-                onClick={ () => onClickTableTr(student.stdCode) }
               >
                 <td><input
                   type="checkbox"

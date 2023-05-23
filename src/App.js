@@ -34,7 +34,6 @@ import PwdChange from './pages/login/Pwdchange';
 import MypageUpdate from './pages/employee/MypageUpdate';
 
 import AttendanceDetail from './components/items/AttendanceDetail';
-import StudentModify from './pages/academic/StudentModify';
 import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
@@ -108,9 +107,9 @@ function App() {
               <Route path="regist-employee" element={<EmployeeRegist />} />
               <Route path="modify-employee/:empCode" element={<EmployeeModify />} />
               <Route path="search-employee" element={<EmployeeManagement />} />
+              
             <Route path="management-student" element={<StudentManagement />} />
               <Route path="regist-student" element={<StudentRegist />} />
-              <Route path=":stdCode/modify" element={<StudentModify />} />
               <Route path="search-student" element={<StudentManagement />} />
 
             <Route path="schedule-academic" element={<AcademicSchedule />} />

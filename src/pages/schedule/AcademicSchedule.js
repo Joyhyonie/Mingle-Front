@@ -2,8 +2,23 @@
 import { motion } from "framer-motion"
 import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 import CommonCSS from '../../css/common/Common.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
 
 function AcademicSchedule() {
+
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.ScheduleReducer);
+
+  useEffect(() => {
+    dispatch(callAcScheduleListAPI());
+}, []);
+
+useEffect(() => {
+    console.log(data);
+}, [data]);
+
 
   return (
     <motion.div
@@ -14,25 +29,18 @@ function AcademicSchedule() {
       <div className={AcademicScheduleCss.acScheLeft}>
         <div className={AcademicScheduleCss.acScheRead}>
           <p><img src="/images/cal.png"></img>전체 학사 일정</p>
+          {data && Array.isArray(data) ?
+            data.map((schedule) => (
+              <div key={schedule.scheCode} readOnly>
+                <p>{schedule.scheStartDate}~{schedule.scheEndDate}</p>
+                <p>{schedule.scheName}</p>
+              </div>
+            ))
+            :
+            <p>No schedule data</p>
+          };
+
         </div>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
-        <p>- 목록입니다.</p>
       </div>
       <div className={AcademicScheduleCss.acScheRegist}>
         <div className={AcademicScheduleCss.acScheRead}>
@@ -48,9 +56,9 @@ function AcademicSchedule() {
           <span>일시</span>
           <div className={AcademicScheduleCss.acScheDateInput}>
             <input type='date' required></input>~
-          <input type='date' required></input>
+            <input type='date' required></input>
           </div>
-          <br/>
+          <br />
         </div>
 
         <div className={AcademicScheduleCss.acScheDetail}>
