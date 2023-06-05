@@ -23,7 +23,6 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
                 Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
-        console.log(result);
         if (result.status === 200) {
             dispatch(getSubjects(result));
         }
