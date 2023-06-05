@@ -9,7 +9,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
-  const { modify } = useSelector(state => state.EmployeeReducer);
+  const { patch } = useSelector(state => state.EmployeeReducer);
   const navigate = useNavigate();
   const imageInput = useRef();
   const [image, setImage] = useState(null);
@@ -22,12 +22,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
     dispatch(callGetEmployeeAPI());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (modify?.status === 200) {
-      toast.success('마이페이지 수정이 완료되었습니다.');
-      closeModal(false);
-    }
-  }, [modify, closeModal]); 
+  
 
   const onChangeHandler = (e) => {
     setForm({

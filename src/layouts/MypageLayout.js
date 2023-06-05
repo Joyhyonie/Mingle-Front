@@ -11,13 +11,14 @@ import { callGetEmployeeAPI } from "../apis/EmployeeAPICalls";
 import MyAttendance from "../components/lists/MyAttendance";
 import MypageUpdate from "../components/modal/MypageUpdate";
 import CommonCSS from "../css/common/Common.module.css";
+import { toast } from "react-hot-toast";
 
 
 function MyPageLayout() {
 
   const [isAttendanceDocModalOpen, setIsAttendanceDocModalOpen] = useState(false);
   const [isMypageUpdateModalOpen, setIsMypageUpdateModalOpen] = useState(false);
-  const { employee } = useSelector(state => state.EmployeeReducer);
+  const { employee, patch } = useSelector(state => state.EmployeeReducer);
   console.log(employee);
 
   /* 읽기모드와 수정모드를 구분 */
@@ -35,6 +36,13 @@ function MyPageLayout() {
   const onClickPwdChangeHandler = () => {
     navigate("/pwdchange")
   }
+
+  useEffect(() => {
+    if (patch?.status === 200) {
+      toast.success('마이페이지 수정이 완료되었습니다.');
+     
+    }
+  }, [patch]); 
 
   const onClickPageChange = () => {
     setIsMypageUpdateModalOpen(true);
