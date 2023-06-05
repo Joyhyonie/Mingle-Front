@@ -33,8 +33,12 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
 export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch, getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+    return async (dispatch, getState) => {        
+        const result = await fetch(requestURL,{
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
 
         if (result.status === 200) {
 
@@ -53,6 +57,9 @@ export const callSubjectInsertAPI = (formData) => {
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'POST',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 
@@ -70,7 +77,8 @@ export const callSubjectDelete = (checkedItems) => {
         const result = await fetch(requestURL, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             },
             body: JSON.stringify(checkedItems)
         }).then(response => response.json());
@@ -95,8 +103,6 @@ export const callSubjectListAPI = (deptCode) => {
         if (result.status === 200) {
 
 
-            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
-            //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getSubjectInfo(result));
 
         }
@@ -230,7 +236,7 @@ export const callOpenLectureListAPI = ({ currentPage = 1 }) => {
             method: 'GET'
         }).then(response => response.json());
 
-        /*dispatch의 매개변수로 action 객체를 전달하여 store에 state를 저장하게 한다. */
+
         if (result.status === 200) {
             dispatch(getOpenLectureInfo(result));
             console.log(result);
@@ -246,9 +252,7 @@ export const callCourceStdListAPI = ({ lecCode }) => {
     console.log(lecCode)
 
     const requestURL = `${ATTENDANCE_URL}/stdlist/${lecCode}`;
-    /*필요한값 생각해보자  */
 
-    //요청 url 이 안에서 비동기적으로 호출된다.. 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'GET'
@@ -257,8 +261,7 @@ export const callCourceStdListAPI = ({ lecCode }) => {
         if (result.status === 200) {
 
 
-            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
-            //store에 있는 값들을 다루는것은 action이라는 
+
             dispatch(getAttendanceListInfo(result));
             console.log(result);
 
@@ -321,6 +324,9 @@ export const callSubjectUpdateAPI = (formData) => {
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'PUT',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 
@@ -340,6 +346,9 @@ export const callLecPlanInsertAPI = (formData, lecCode) => {
 
         const result = await fetch(requestURL, {
             method: 'PATCH',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 
