@@ -31,7 +31,7 @@ function AppliedCertidocs () {
     useEffect(
         ()=>{
             if(name){
-                dispatch(callCertiDocSearchName({search : name, condition: condition, currentPage : setCurrentPage(currentPage) }));
+                dispatch(callCertiDocSearchName({search : name, condition: condition, currentPage : currentPage }));
                 return;
             }
             dispatch(callCertiListAPI({currentPage}));

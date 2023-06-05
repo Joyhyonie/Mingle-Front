@@ -16,11 +16,9 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
   return async (dispatch, getState) => {
 
     const result = await fetch(requestURL).then(response => response.json());
-    console.log(result);
 
     if (result.status === 200) {
       dispatch(getStaffs(result));
-      console.log(result);
     }
   }
 }
@@ -33,11 +31,9 @@ export const callAllEmployeesAPI = ({ currentPage = 1 }) => {
   return async (dispatch, getState) => {
 
     const result = await fetch(requestURL).then(response => response.json());
-    console.log(result);
 
     if (result.status === 200) {
       dispatch(getList(result));
-      console.log(result);
     }
   }
 }
@@ -51,7 +47,6 @@ export const callEmployeeSearchListAPI = ({ search, condition, currentPage = 1 }
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
       dispatch(getSearch(result.data));
     }
   }
@@ -65,7 +60,6 @@ export const callOrganizationSearchListAPI = ({ search, condition, currentPage =
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
       dispatch(getSearchName(result.data));
     }
   }
@@ -87,7 +81,6 @@ export const callEmployeeDetailAPI = (empCode) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[AcademicAPICalls] callEmployeeDetailAPI result : ", result);
       dispatch(getStaff(result));
 
 
@@ -110,7 +103,6 @@ export const callEmployeeInsertAPI = (formData) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callEmployeeInsertAPI result : ', result);
       dispatch(postStaff(result));
     }
   }
@@ -130,7 +122,6 @@ export const callEmployeeUpdateAPI = (formData) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callEmployeeUpdateAPI result : ', result);
       dispatch(putStaff(result));
     }
   }
@@ -152,7 +143,6 @@ export const callEmployeesDeleteAPI = (empCodes) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callEmployeesDeleteAPI result : ', result);
       dispatch(deleteStaff(result));
     }
   }
@@ -174,7 +164,6 @@ export const callStudentsAPI = ({ currentPage = 1 }) => {
 
     if (result.status === 200) {
       dispatch(getStudents(result));
-      console.log("[AcademicAPICalls] callStudentsAPI result : ", result);
     }
   }
 }
@@ -187,7 +176,6 @@ export const callStudentSearchListAPI = ({ search, condition, currentPage = 1 })
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[AcademicAPICalls] callStudentSearchListAPI result : ", result);
       dispatch(getSearchStudent(result.data));
     }
   }
@@ -209,7 +197,6 @@ export const callStudentDetailAPI = (stdCode) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[AcademicAPICalls] callStudentDetailAPI result : ", result);
       dispatch(getStudent(result));
 
 
@@ -233,7 +220,6 @@ export const callStudentInsertAPI = (formData) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callStudentInsertAPI result : ', result);
       dispatch(postStudent(result));
     }
 
@@ -255,7 +241,6 @@ export const callStudentUpdateAPI = (formData) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callStudentUpdateAPI result : ', result);
       dispatch(putStudent(result));
     }
   }
@@ -277,7 +262,6 @@ export const callStudentsDeleteAPI = (stdCodes) => {
     }).then(response => response.json());
 
     if (result.status === 200) {
-      console.log('[AcademicAPICalls] : callStudentsDeleteAPI result : ', result);
       dispatch(deleteStudent(result));
     }
   }
