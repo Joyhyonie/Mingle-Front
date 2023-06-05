@@ -1,4 +1,3 @@
-import { async } from "q";
 import { getCertidocname, getCertis, getMycertidocname, patchCerti, postCerti } from "../modules/CertiModule";
 
 
@@ -6,7 +5,7 @@ const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const CERTI_URL = `http://${SERVER_IP}:${SERVER_PORT}/certi`;
 
-export const callCertiListAPI = ({currentPage = 1}) => {
+export const callCertiListAPI = ({ currentPage = 1 }) => {
     const requestURL = `${CERTI_URL}/list?page=${currentPage}`;
 
     return async (dispatch, getState) => {
@@ -90,7 +89,6 @@ export const callMyCertiDocListAPI = ({currentPage = 1}) => {
 
         if(result.status === 200){
             dispatch(getCertis(result));
-            console.log(result);
         }
     }
 
@@ -107,7 +105,6 @@ export const callDetailCertiDoc = (myCerti) => {
 
         if(result.status === 200){
             dispatch(getCertis(result));
-            console.log(result);
         }
     }
 }
@@ -125,7 +122,6 @@ export const callRegistCertiDoc = (formData) => {
         }).then((response)=> response.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(postCerti(result));
         }
     }

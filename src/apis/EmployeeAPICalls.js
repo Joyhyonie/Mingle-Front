@@ -155,9 +155,7 @@ export const callPwdChangeAPI = (form) => {
           },
           body: JSON.stringify(form)
         }).then(response => response.json());
-  
         if (result.status === 200) {
-          console.log('[EmployeeCalls] callPwdChangeAPI result : ', result);
           // 성공 메시지 처리
           toast.success(result.message); // 또는 다른 방식으로 메시지 표시       
         } else {
@@ -166,7 +164,6 @@ export const callPwdChangeAPI = (form) => {
         }
       } catch (error) {
         // 예기치 못한 오류 처리
-        console.error('An error occurred:', error);
         toast.error('요청을 처리하는 중에 오류가 발생했습니다.');
       }
     };

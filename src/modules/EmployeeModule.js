@@ -38,6 +38,7 @@ const EmployeeReducer = handleActions({
   [RESET_EMPLOYEE]: (state, { payload }) => payload,
   [GET_EMPLOYEE]: (state, { payload }) => ({ ...state, employee: payload }),
   [PATCH_EMPLOYEE]: (state, { payload }) => ({modify : payload}),
+  [PATCH_EMPLOYEE]: (state, { payload }) => ({ ...state, patch : payload}),
   [POST_ID]:(state, { payload }) => ({ search : payload}),
   [POST_PWD]:(state, { payload }) => ({ search : payload}),
   [POST_PWDCHANGE]:(state, { payload }) => ({ change : payload }),
