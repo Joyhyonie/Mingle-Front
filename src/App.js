@@ -94,7 +94,7 @@ function App() {
             </Route>
 
             <Route path="attendance-employee" element={<ProtectedRoute adminCheck={true}><EmployeeAttendance /></ProtectedRoute>}>
-              <Route path='search' element={<EmployeeAttendance />} />              
+              <Route path='search' element={<EmployeeAttendance />} />
             </Route>
             <Route path="attendance-employee/:empCode" element={<AttendanceEmployeeDetail />} />
 
@@ -116,20 +116,21 @@ function App() {
             <Route path="lecture-student-prof" element={<ProtectedRoute profCheck={true}><StudentAttendanceForProf /></ProtectedRoute>}>
               <Route path='search' element={<StudentAttendanceForProf />} />
             </Route>
+            <Route path="lecture-student-prof/:lecCode" element={<ProtectedRoute profCheck={true}><AttendanceDetailList /></ProtectedRoute>} />
             <Route path="lecture-regist-prof" element={<ProtectedRoute profCheck={true}><RegistLectureForProf /></ProtectedRoute>}>
               <Route path='search' element={<RegistLectureForProf />} />
             </Route>
 
             <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
             <Route path="regist-employee" element={<ProtectedRoute adminCheck={true}><EmployeeRegist /></ProtectedRoute>} />
-            <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>}/>
+            <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>} />
             <Route path='search' element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
-              
+
             <Route path="management-student" element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
             <Route path="regist-student" element={<ProtectedRoute adminCheck={true}><StudentRegist /></ProtectedRoute>} />
             <Route path="modify-student/:stdCode" element={<ProtectedRoute adminCheck={true}><StudentModify /></ProtectedRoute>} />
             <Route path='search' element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
-              
+
             <Route path="schedule-academic" element={<ProtectedRoute adminCheck={true}><AcademicSchedule /></ProtectedRoute>} />
           </Route>{/* <Layout/>의 Route */}
 
