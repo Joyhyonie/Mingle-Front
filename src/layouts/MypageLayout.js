@@ -1,12 +1,9 @@
 import { Outlet } from "react-router-dom";
 import MyPageLayoutCSS from '../css/MyPageLayout.module.css';
 import { useNavigate } from "react-router-dom";
-import MyPageAttendance from "../pages/attendance/MyPageAttendance";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import SubjectUpdateModal from "../components/modal/SubjectUpdateModal";
 import AttendanceDocInsert from "../components/modal/AttendanceDocInser";
-import { getEmployee } from "../modules/EmployeeModule";
 import { callGetEmployeeAPI } from "../apis/EmployeeAPICalls";
 import MyAttendance from "../components/lists/MyAttendance";
 import MypageUpdate from "../components/modal/MypageUpdate";
@@ -20,6 +17,13 @@ function MyPageLayout() {
   const [isMypageUpdateModalOpen, setIsMypageUpdateModalOpen] = useState(false);
   const { employee, patch } = useSelector(state => state.EmployeeReducer);
   console.log(employee);
+
+  useEffect(() => {
+    if (patch?.status === 200) {
+      toast.success('마이페이지 수정이 완료되었습니다 :)');
+     
+    }
+  }, [patch]); 
 
   /* 읽기모드와 수정모드를 구분 */
   const [modifyMode, setModifyMode] = useState(false);
@@ -48,8 +52,6 @@ function MyPageLayout() {
     setIsMypageUpdateModalOpen(true);
     setModifyMode(true);
     setForm({ ...employee });
-
-
   }
 
   const onClickHandlerLeaveDoc = () => {

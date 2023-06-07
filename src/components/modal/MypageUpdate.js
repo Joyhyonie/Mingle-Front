@@ -24,14 +24,13 @@ function MypageUpdate({ closeModal, modifyMode }) {
 
   
 
+
   const onChangeHandler = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
-
-  
 
   /* 파일 첨부 시 동작하는 이벤트 */
   const onChangeImageUpload = (e) => {
@@ -64,7 +63,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
     if (image) {
       formData.append('myPageImage', image);
     }
-    await dispatch(callPatchEmployeeAPI(formData));
+    dispatch(callPatchEmployeeAPI(formData));
     closeModal(false);
      navigate('/mypage');
   };
