@@ -9,10 +9,21 @@ function MypageUpdate({ closeModal, modifyMode }) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
+  const { patch } = useSelector(state => state.EmployeeReducer);
   const navigate = useNavigate();
   const imageInput = useRef();
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+
+
+
+  const fileInputRef = useRef(null);
+  useEffect(() => {
+    dispatch(callGetEmployeeAPI());
+  }, [dispatch]);
+
+  
+
 
   const onChangeHandler = (e) => {
     setForm({
